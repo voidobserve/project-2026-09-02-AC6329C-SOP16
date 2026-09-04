@@ -46,6 +46,7 @@ enum
     RF24G_KEY_VAL_R7C4 = 0x04,
 };
 
+#if 0
 // 定义按键事件 （28个按键）
 enum
 {
@@ -221,18 +222,21 @@ enum
     RF24G_28_KEY_EVENT_MAX,
 };
 
-#define RF34G_KEY_EVENT_MAX (5) // 按键事件种类个数，刚按下、短按、长按、持续hold、松开
+#define RF34G_KEY_EVENT_MAX                                                    \
+    (5) // 按键事件种类个数，刚按下、短按、长按、持续hold、松开
 
 #define RF24G_KEY_SCAN_TIME_MS (10) // 2.4G遥控器按键扫描频率，单位：ms
 #define RF24G_KEY_LONG_TIME_MS (1500)
 #define RF24G_KEY_HOLD_TIME_MS (500)
-#define RF24G_KEY_SCAN_CLICK_DELAY_TIME_MS (0) // 2.4G遥控器按键被抬起后等待连击延时数量
-#define RF24G_KEY_SCAN_FILTER_TIME_MS (0)      // 2.4G遥控器按键消抖延时
+#define RF24G_KEY_SCAN_CLICK_DELAY_TIME_MS                                     \
+    (0) // 2.4G遥控器按键被抬起后等待连击延时数量
+#define RF24G_KEY_SCAN_FILTER_TIME_MS (0) // 2.4G遥控器按键消抖延时
+#endif
 
 /*
     用 AK803-SOP16 写的遥控器
     它发送的数据包对应的格式头
-*/ 
+*/
 enum
 {
     // 28键遥控器
@@ -244,6 +248,7 @@ enum
     REMOTE_TYPE_24KEY_HEADER_2 = 0x4A,
 };
 
+#if 0
 typedef struct
 {
 #if 1 // 803 2.4G遥控器 数据包：
@@ -256,13 +261,27 @@ typedef struct
     u8 fix_val_2;    // 固定值
     u8 fix_val_3;    // 固定值
     u8 dynamic_code; // 滚动码
-
-    // u8 fix_val_4; // 固定值
-
+#endif 
+} rf24g_recv_info_t; // 指令数据
 #endif
 
-} rf24g_recv_info_t; // 指令数据
+enum
+{
+    REMOTER_TYPE_28KEY,
+    REMOTER_TYPE_24KEY,
+};
+typedef u8 remoter_type_t;
 
+typedef struct
+{
+    u8 is_update; // 是否有更新
+    u8 is_key_pass;              // 是否是对应的按键
+    u8 key_val;                // 键值
+    s8 rssi;                     // 遥控器信号强度
+    remoter_type_t remoter_type; // 遥控器类型
+} rf24g_remoter_param_t;
+
+#if 0
 // 给【指向遥控器按键事件处理函数的指针类型】起别名
 typedef void (*rf24_key_handle_func_t)(void);
 
@@ -270,10 +289,13 @@ extern volatile struct key_driver_para rf24g_scan_para;
 extern volatile u8 rf24g_key_driver_value;
 extern volatile u8 rf24g_key_driver_event;
 extern const rf24_key_handle_func_t rf24_28keys_handle_func_buff[RF24G_28_KEY_EVENT_MAX];
-
-
+ 
 
 void rf24_key_handle(void);
+#endif
+
+extern const u8 rf24g_key_val_table[28];
+extern volatile rf24g_remoter_param_t rf24g_remoter_param;
 
 #endif // RF24GKEY_ENABLE
 

@@ -1,10 +1,7 @@
 objs/apps/spp_and_le/user_app/driver/buzzer/buzzer.c.o: \
   ../../../../apps/spp_and_le/user_app/driver/buzzer/buzzer.c \
   ../../../../apps/spp_and_le/user_app/driver/buzzer/buzzer.h \
-  ../../../../include_lib/system\includes.h \
-  ../../../../include_lib/system/init.h \
-  ../../../../include_lib/system/event.h \
-  ../../../../include_lib/system/generic/typedef.h \
+  ../../../../include_lib/system/generic\typedef.h \
   ../../../../include_lib/driver/cpu/bd19\asm/cpu.h \
   ../../../../include_lib/driver/cpu/bd19\asm/bd19.h \
   ../../../../include_lib/driver/cpu/bd19\asm/io_omap.h \
@@ -14,6 +11,7 @@ objs/apps/spp_and_le/user_app/driver/buzzer/buzzer.c.o: \
   ../../../../include_lib/driver/cpu/bd19\asm/irq.h \
   ../../../../include_lib/driver/cpu/bd19\asm/hwi.h \
   ../../../../include_lib/system\generic/printf.h \
+  ../../../../include_lib/system/generic/typedef.h \
   ../../../../include_lib\system/generic/log.h \
   ../../../../include_lib/system\generic/errno-base.h \
   C:/JL/pi32/q32s-include\string.h C:/JL/pi32/q32s-include/_ansi.h \
@@ -30,6 +28,9 @@ objs/apps/spp_and_le/user_app/driver/buzzer/buzzer.c.o: \
   C:/JL/pi32/q32s-include\sys/_stdint.h \
   C:/JL/pi32/q32s-include\machine/types.h \
   ../../../../include_lib\system/malloc.h \
+  ../../../../include_lib/system\includes.h \
+  ../../../../include_lib/system/init.h \
+  ../../../../include_lib/system/event.h \
   ../../../../include_lib/system/generic/list.h \
   ../../../../include_lib/system/generic/rect.h \
   ../../../../include_lib/system/spinlock.h \

@@ -107,4 +107,5 @@ objs/apps/spp_and_le/user_app/rf24g/rf24g_key.c.o: \
   ../../../../include_lib/driver/cpu/bd19\asm/mcpwm.h \
   ../../../../include_lib/driver\device/sdio_host_init.h \
   ../../../../include_lib/btstack\le/ble_api.h \
-  ../../../../include_lib\btstack/btstack_typedef.h
+  ../../../../include_lib\btstack/btstack_typedef.h \
+  ../../../../apps/spp_and_le/user_app/driver/buzzer\buzzer.h

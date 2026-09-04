@@ -107,4 +107,6 @@ objs/apps/spp_and_le/user_app/user_main.c.o: \
   ../../../../include_lib/driver\device/sdio_host_init.h \
   ../../../../apps/spp_and_le/user_app/driver/indicator_light\indicator_light.h \
   ../../../../apps/spp_and_le/user_app/driver/buzzer\buzzer.h \
-  ../../../../apps/spp_and_le/user_app/driver/oled\oled.h
+  ../../../../apps/spp_and_le/user_app/driver/oled\oled.h \
+  ../../../../apps/spp_and_le/user_app/driver/oled/oled_data.h \
+  ../../../../apps/spp_and_le/user_app/rf24g\rf24g_key.h

@@ -1,20 +1,7 @@
 objs/apps/spp_and_le/user_app/driver/oled/oled.c.o: \
   ../../../../apps/spp_and_le/user_app/driver/oled/oled.c \
   ../../../../apps/spp_and_le/user_app/driver/oled/oled.h \
-  C:/JL/pi32/q32s-include\string.h C:/JL/pi32/q32s-include/_ansi.h \
-  C:/JL/pi32/q32s-include\newlib.h C:/JL/pi32/q32s-include\sys/config.h \
-  C:/JL/pi32/q32s-include\machine/ieeefp.h \
-  C:/JL/pi32/q32s-include\sys/features.h \
-  C:/JL/pi32/q32s-include\sys/reent.h \
-  C:/JL/pi32/q32s-include\sys/_types.h \
-  C:/JL/pi32/q32s-include\machine/_types.h \
-  C:/JL/pi32/q32s-include\machine/_default_types.h \
-  C:/JL/pi32/q32s-include\sys/lock.h C:/JL/pi32/q32s-include\sys/cdefs.h \
-  C:/JL/pi32/q32s-include\sys/string.h \
-  ../../../../include_lib/system\includes.h \
-  ../../../../include_lib/system/init.h \
-  ../../../../include_lib/system/event.h \
-  ../../../../include_lib/system/generic/typedef.h \
+  ../../../../include_lib/system/generic\typedef.h \
   ../../../../include_lib/driver/cpu/bd19\asm/cpu.h \
   ../../../../include_lib/driver/cpu/bd19\asm/bd19.h \
   ../../../../include_lib/driver/cpu/bd19\asm/io_omap.h \
@@ -24,12 +11,27 @@ objs/apps/spp_and_le/user_app/driver/oled/oled.c.o: \
   ../../../../include_lib/driver/cpu/bd19\asm/irq.h \
   ../../../../include_lib/driver/cpu/bd19\asm/hwi.h \
   ../../../../include_lib/system\generic/printf.h \
+  ../../../../include_lib/system/generic/typedef.h \
   ../../../../include_lib\system/generic/log.h \
   ../../../../include_lib/system\generic/errno-base.h \
-  C:/JL/pi32/q32s-include\strings.h C:/JL/pi32/q32s-include\sys/types.h \
+  C:/JL/pi32/q32s-include\string.h C:/JL/pi32/q32s-include/_ansi.h \
+  C:/JL/pi32/q32s-include\newlib.h C:/JL/pi32/q32s-include\sys/config.h \
+  C:/JL/pi32/q32s-include\machine/ieeefp.h \
+  C:/JL/pi32/q32s-include\sys/features.h \
+  C:/JL/pi32/q32s-include\sys/reent.h \
+  C:/JL/pi32/q32s-include\sys/_types.h \
+  C:/JL/pi32/q32s-include\machine/_types.h \
+  C:/JL/pi32/q32s-include\machine/_default_types.h \
+  C:/JL/pi32/q32s-include\sys/lock.h C:/JL/pi32/q32s-include\sys/cdefs.h \
+  C:/JL/pi32/q32s-include\sys/string.h C:/JL/pi32/q32s-include\strings.h \
+  C:/JL/pi32/q32s-include\sys/types.h \
   C:/JL/pi32/q32s-include\sys/_stdint.h \
   C:/JL/pi32/q32s-include\machine/types.h \
   ../../../../include_lib\system/malloc.h \
+  ../../../../apps/spp_and_le/user_app/driver/oled/oled_data.h \
+  ../../../../include_lib/system\includes.h \
+  ../../../../include_lib/system/init.h \
+  ../../../../include_lib/system/event.h \
   ../../../../include_lib/system/generic/list.h \
   ../../../../include_lib/system/generic/rect.h \
   ../../../../include_lib/system/spinlock.h \
@@ -106,4 +108,5 @@ objs/apps/spp_and_le/user_app/driver/oled/oled.c.o: \
   ../../../../include_lib/driver/cpu/bd19\asm/rtc.h \
   ../../../../include_lib/driver/cpu/bd19\asm/mcpwm.h \
   ../../../../include_lib/driver\device/sdio_host_init.h \
-  ../../../../include_lib/driver/cpu/bd19\asm/iic_soft.h
+  ../../../../include_lib/driver/cpu/bd19\asm/iic_soft.h \
+  ../../../../apps/spp_and_le/user_app/rf24g\rf24g_key.h

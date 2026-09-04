@@ -1,9 +1,26 @@
 #include "rf24g_key.h"
 #include "le/ble_api.h" // adv_report_t
 #include "key_driver.h"
+#include "buzzer.h"
 
 #if (RF24GKEY_ENABLE)
 
+const u8 rf24g_key_val_table[] = {
+    RF24G_KEY_VAL_R1C1, RF24G_KEY_VAL_R1C2, RF24G_KEY_VAL_R1C3,
+    RF24G_KEY_VAL_R1C4, RF24G_KEY_VAL_R2C1, RF24G_KEY_VAL_R2C2,
+    RF24G_KEY_VAL_R2C3, RF24G_KEY_VAL_R2C4, RF24G_KEY_VAL_R3C1,
+    RF24G_KEY_VAL_R3C2, RF24G_KEY_VAL_R3C3, RF24G_KEY_VAL_R3C4,
+    RF24G_KEY_VAL_R4C1, RF24G_KEY_VAL_R4C2, RF24G_KEY_VAL_R4C3,
+    RF24G_KEY_VAL_R4C4, RF24G_KEY_VAL_R5C1, RF24G_KEY_VAL_R5C2,
+    RF24G_KEY_VAL_R5C3, RF24G_KEY_VAL_R5C4, RF24G_KEY_VAL_R6C1,
+    RF24G_KEY_VAL_R6C2, RF24G_KEY_VAL_R6C3, RF24G_KEY_VAL_R6C4,
+    RF24G_KEY_VAL_R7C1, RF24G_KEY_VAL_R7C2, RF24G_KEY_VAL_R7C3,
+    RF24G_KEY_VAL_R7C4,
+};
+
+volatile rf24g_remoter_param_t rf24g_remoter_param = {0};
+
+#if 0
 /*
     用 AK803-SOP16 写的遥控器
 */
@@ -122,9 +139,10 @@ volatile struct key_driver_para rf24g_scan_para = {
     .key_type = KEY_DRIVER_TYPE_RF24GKEY,
     .get_value = rf24g_get_key_value,
 };
+#endif
 
 // 底层按键扫描，由 __resolve_adv_report() 调用
-void rf24g_scan(adv_report_t *adv_report )
+void rf24g_scan(adv_report_t *adv_report)
 {
     //     rf24g_recv_info_t *p = (rf24g_recv_info_t *)recv_buff;
     //     if (p->header1 == REMOTE_TYPE_28KEY_HEADER_1 &&
@@ -142,6 +160,7 @@ void rf24g_scan(adv_report_t *adv_report )
     s8 rssi;    // 信号强度， -127 ~ 128 dbm
     u8 header_1;
     u8 header_2;
+    u8 i;
 
     if (adv_report->length < 10) {
         return;
@@ -164,16 +183,46 @@ void rf24g_scan(adv_report_t *adv_report )
     key_val = adv_report->data[7];
 
     // printf("ad_type == %u\n", ad_type);
-    printf("rssi == %d\n", (int)rssi);
+    // printf("rssi == %d\n", (int)rssi);
     // printf("header_1 == %02x\n", (u16)header_1);
     // printf("header_2 == %02x\n", (u16)header_2);
-    printf("key_val == %02x\n", (u16)key_val);
+    // printf("key_val == %02x\n", (u16)key_val);
 
-    // TODO 
+    if (header_1 == REMOTE_TYPE_28KEY_HEADER_1 &&
+        header_2 == REMOTE_TYPE_28KEY_HEADER_2) {
+        // 28键2.4G遥控器
+        rf24g_remoter_param.remoter_type = REMOTER_TYPE_28KEY;
+    } else {
+        // 24键2.4G遥控器
+        rf24g_remoter_param.remoter_type = REMOTER_TYPE_24KEY;
+    }
 
+    rf24g_remoter_param.key_val = key_val;
+    rf24g_remoter_param.rssi = rssi;
+    rf24g_remoter_param.is_update = 1;
 
+#if 0
+    // 将遍历比较操作放到主循环来执行，否则会阻塞蓝牙线程
+    rf24g_remoter_param.is_key_pass = 0;
+    for (i = 0; i < ARRAY_SIZE(rf24g_key_val_table); i++) {
+        if (rf24g_key_val_table[i] == key_val) {
+            rf24g_remoter_param.is_key_pass = 1;
+            break;
+        }
+    }
+
+         if (rf24g_remoter_param.is_key_pass) {
+                buzzer_play(12);
+            }
+#endif
+
+    // printf("remoter_type == %u\n", (u16)rf24g_remoter_param.remoter_type);
+    // printf("key_val == %02x\n", (u16)rf24g_remoter_param.key_val);
+    // printf("rssi == %d\n", (int)rf24g_remoter_param.rssi);
+    // printf("is_key_pass == %u\n", (u16)rf24g_remoter_param.is_key_pass);
 }
 
+#if 0
 static u8 rf24g_get_key_value(void)
 {
     u8 key_value = 0;
@@ -523,5 +572,7 @@ const rf24_key_handle_func_t rf24_28keys_handle_func_buff[RF24G_28_KEY_EVENT_MAX
     [RF24G_28_KEY_EVENT_R7C4_PRESS] = rf24g_28keys_event_r7c4_click_handle,
 
 };
+
+#endif
 
 #endif // RF24GKEY_ENABLE
