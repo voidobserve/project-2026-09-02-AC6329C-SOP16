@@ -28,6 +28,8 @@ void user_init(void)
 void user_main(void)
 {
     u8 i;
+    // 按键通过之后，保持显示pass的时间
+    static volatile u16 pass_time_cnt = 0;
     while (1) {
 
         if (rf24g_remoter_param.is_update) {
@@ -42,13 +44,28 @@ void user_main(void)
             }
 
             if (rf24g_remoter_param.is_key_pass) {
-                buzzer_play(12);
+                buzzer_play(24);
                 indicator_light_on();
             } else {
                 buzzer_pause();
                 indicator_light_off();
             }
         }
+
+#if 0
+        // 按键通过之后，保持显示pass和指示灯点亮一段时间，再关闭
+        if (rf24g_remoter_param.is_key_pass) {
+            indicator_light_on();
+            pass_time_cnt++;
+            if (pass_time_cnt >= 400) {
+                pass_time_cnt = 0;
+                rf24g_remoter_param.is_key_pass = 0;
+            }
+        } else {
+            buzzer_pause();
+            indicator_light_off();
+        }
+#endif
 
         oled_display_refresh_handle();
         os_time_dly(1);

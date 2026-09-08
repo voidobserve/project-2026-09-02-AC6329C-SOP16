@@ -284,26 +284,28 @@ void oled_display_refresh_handle(void)
         oled_display_string(0, 16 * 2, "KEY", OLED_FONT_SIZE_TYPE_8X16);
 
         if (REMOTER_TYPE_28KEY == rf24g_remoter_param.remoter_type) {
-            oled_display_string(6 * 8, 16 * 0, "28", OLED_FONT_SIZE_TYPE_8X16);
+            oled_display_string(6 * 12, 16 * 0, "28", OLED_FONT_SIZE_TYPE_8X16);
+        } else if (REMOTER_TYPE_24KEY == rf24g_remoter_param.remoter_type) {
+            oled_display_string(6 * 12, 16 * 0, "24", OLED_FONT_SIZE_TYPE_8X16);
         } else {
-            oled_display_string(6 * 8, 16 * 0, "24", OLED_FONT_SIZE_TYPE_8X16);
+            oled_display_string(6 * 12, 16 * 0, "  ", OLED_FONT_SIZE_TYPE_8X16);
         }
 
         // rssi :
-        sprintf(buf, "%d", (int)rf24g_remoter_param.rssi);
+        sprintf(buf, "%d", (int32_t)rf24g_remoter_param.rssi);
         // printf("buf == %s\n", buf);
-        oled_display_string(6 * 8, 16 * 1, buf, OLED_FONT_SIZE_TYPE_8X16);
+        oled_display_string(6 * 12, 16 * 1, buf, OLED_FONT_SIZE_TYPE_8X16);
         // key:
-        sprintf(buf, "%02x", (u16)rf24g_remoter_param.key_val);
+        sprintf(buf, "0x%02x", (u16)rf24g_remoter_param.key_val);
         // printf("buf == %s\n", buf);
-        oled_display_string(6 * 8, 16 * 1, buf, OLED_FONT_SIZE_TYPE_8X16);
+        oled_display_string(6 * 12, 16 * 2, buf, OLED_FONT_SIZE_TYPE_8X16);
         // sprintf(buf, "%s");
 
         if (rf24g_remoter_param.is_key_pass) {
-            oled_display_string(6 * 8, 16 * 2, "PASS",
+            oled_display_string(6 * 8, 16 * 3, "PASS",
                                 OLED_FONT_SIZE_TYPE_8X16);
         } else {
-            oled_display_clear_area(6 * 8, 16 * 2, 8 * 4, 16);
+            oled_display_clear_area(6 * 8, 16 * 3, 8 * 4, 16);
         }
 
         oled_display_refresh();

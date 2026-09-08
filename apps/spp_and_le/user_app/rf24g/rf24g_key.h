@@ -267,6 +267,7 @@ typedef struct
 
 enum
 {
+    REMOTER_TYPE_UNKNOWN,
     REMOTER_TYPE_28KEY,
     REMOTER_TYPE_24KEY,
 };
